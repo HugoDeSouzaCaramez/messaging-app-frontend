@@ -3,9 +3,15 @@ import Sidebar from './components/Sidebar';
 import Chat from './components/Chat';
 import React, { useEffect, useState } from 'react';
 import Pusher from 'pusher-js';
+import axios from './components/axios';
 
 function App() {
   const [messages, setMessages] = useState([]);
+  useEffect(() => {
+    axios.get('/messages/sync').then((res) => {
+      setMessages(res.data);
+    });
+  }, []);
   useEffect(() => {
     const pusher = new Pusher('b2ef58ee33ceed1b44c9', {
       cluster: 'sa1',
@@ -24,7 +30,7 @@ function App() {
     <div className="App">
       <div className="app__body">
         <Sidebar />
-        <Chat />
+        <Chat messages={messages} />
       </div>
     </div>
   );
