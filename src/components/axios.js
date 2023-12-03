@@ -1,5 +1,5 @@
 import axios from 'axios';
 const instance = axios.create({
-  baseURL: 'http://localhost:9000',
+  baseURL: 'https://messaging-app-backend-yn8b.onrender.com',
 });
 export default instance;
